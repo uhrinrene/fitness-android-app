@@ -26,14 +26,12 @@ fun NavGraph(modifier: PaddingValues, navController: NavHostController) {
             composable(route = "Screen.ExerciseList") {
                 val viewModel: ExerciseListViewModel = koinViewModel()
                 ExerciseListScreen(
-                    viewModel = viewModel,
-                    onExerciseClicked = { callback ->
-                        navController.navigate("Screen.ExerciseDetail")
-                    }
+                    viewModel = viewModel
                 )
             }
 
             composable(route = "Screen.ExerciseDetail") {
+//                navController.navigate("Screen.ExerciseDetail")
 //                val viewModel: ExerciseDetailViewModel = koinViewModel()
                 Text("Detail")
 //                ExerciseDetailScreen(

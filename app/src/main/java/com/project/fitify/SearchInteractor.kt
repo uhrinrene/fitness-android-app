@@ -1,8 +1,10 @@
 package com.project.fitify
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 
@@ -13,9 +15,9 @@ class SearchInteractor(private val repository: IExerciseRepository) :
 
     override suspend fun sendAction(action: SearchActions) = _searchFlow.emit(value = action)
 
-    @OptIn(ExperimentalCoroutinesApi::class)
+    @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
     override fun loadData(): Flow<ResultState<ExercisePacksDomainModel>> {
-        return _searchFlow.flatMapLatest { action ->
+        return _searchFlow.debounce(timeoutMillis = 500).flatMapLatest { action ->
             when (action) {
                 SearchActions.Retry -> TODO()
                 is SearchActions.Search -> search(query = action.query)
@@ -29,6 +31,7 @@ class SearchInteractor(private val repository: IExerciseRepository) :
             val exercises = repository.searchExercises(query = query)
                 .map { exerciseDto ->
                     ExercisePacksDomainModel.ExercisePackDomainModel(
+                        query = query,
                         thumbnailUrl = "",
                         title = exerciseDto.title,
                         packCode = exerciseDto.packCode,

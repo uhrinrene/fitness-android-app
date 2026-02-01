@@ -5,14 +5,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.project.fitify.ExerciseCodeUiModel
-import com.project.fitify.ExerciseItemUiModel
 import com.project.fitify.ExercisePackUiModel
 
 @Composable
-fun ExerciseItemView(modifier: Modifier = Modifier, model: ExercisePackUiModel, onExerciseClicked: (ExerciseCodeUiModel) -> Unit) {
-    Row(modifier = modifier.clickable {
-        onExerciseClicked(model.onClick())
+fun ExerciseItemView(modifier: Modifier = Modifier, model: ExercisePackUiModel) {
+    Row(modifier = Modifier.clickable {
+        model.onClick()
     }) {
         // TODO spatne funguje
 //        thumbnail(imageUrl = model.icon)

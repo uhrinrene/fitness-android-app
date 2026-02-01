@@ -1,14 +1,21 @@
 package com.project.fitify
 
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 
 class ExerciseListInteractor(
-    private val api: IExerciseRepository
-) : ISimpleInteractor<ExercisePacksDomainModel> {
+    private val repository: IExerciseRepository
+) : IInteractor<ExercisePacksActions, ExercisePacksDomainModel> {
+
+    private val _exerciseListFlow = MutableSharedFlow<ExercisePacksActions>()
+
+    override suspend fun sendAction(action: ExercisePacksActions) = _exerciseListFlow.emit(value = action)
 
     // TODO Zkusit chybu
     // TODO vytvorit celej odkaz na obrazek
@@ -16,44 +23,57 @@ class ExerciseListInteractor(
     // TODO hanndling coroutine myslim tim ten try catch
     // TODO Premysleni o rozdeleni tech dvou do interactoru a UseCasu, uvidim jeste
     // TODO think about naming
-    override fun loadData(): Flow<ResultState<ExercisePacksDomainModel>> = flow {
-        emit(value = ResultState.Loading)
+    // TODO formatovani
+    // TODO rozsekat to na casti
+    // TODO retry
+    // TODO packCode uz je soucasti
+    @OptIn(ExperimentalCoroutinesApi::class)
+    override fun loadData(): Flow<ResultState<ExercisePacksDomainModel>> {
+        return _exerciseListFlow.flatMapLatest {
 
-        try {
-            val exercises = coroutineScope {
-                api.getExercisePacks().tools
-                    .map { tool ->
-                        async {
-                            api.getExercises(packCode = tool.packCode).map { exerciseDto ->
-                                exerciseDto to tool.packCode
+            flow {
+                try {
+                    emit(value = ResultState.Loading)
+                    val exercises = coroutineScope {
+                        repository.getExercisePacks().tools
+                            .map { tool ->
+                                async {
+                                    repository.getExercises(packCode = tool.packCode)
+                                        .map { exerciseDto ->
+                                            exerciseDto to tool.packCode
+                                        }
+                                }
                             }
-                        }
+                            .awaitAll()
+                            .flatten()
+                            .map { (exerciseDto, packCode) ->
+                                ExercisePacksDomainModel.ExercisePackDomainModel(
+                                    thumbnailUrl = "",
+                                    title = exerciseDto.title,
+                                    packCode = packCode,
+                                    exerciseCode = exerciseDto.exerciseCode
+                                )
+                            }
                     }
-                    .awaitAll()
-                    .flatten()
-                    .map { (exerciseDto, packCode) ->
-                        ExercisePackDomainModel(
-                            thumbnailUrl = "",
-                            title = exerciseDto.title,
-                            packCode = packCode,
-                            exerciseCode = exerciseDto.exerciseCode
+
+                    emit(ResultState.Success(value = ExercisePacksDomainModel(items = exercises)))
+
+                } catch (e: Exception) {
+                    emit(
+                        ResultState.Error(
+                            errorDomainModel = ErrorDomainModel(
+                                throwable = e,
+                                message = e.message ?: "Chyba při stahování dat"
+                            )
                         )
-                    }
+                    )
+                }
             }
-
-            emit(ResultState.Success(value = ExercisePacksDomainModel(items = exercises)))
-
-        } catch (e: Exception) {
-            emit(ResultState.Error(errorDomainModel = ErrorDomainModel(throwable = e, message = e.message ?: "Chyba při stahování dat")))
         }
     }
 }
 
-data class ExercisePacksDomainModel(val items: List<ExercisePackDomainModel>)
-
-data class ExercisePackDomainModel(
-    val thumbnailUrl: String,
-    val title: String,
-    val packCode: String,
-    val exerciseCode: String
-)
+sealed interface ExercisePacksActions {
+    data object LoadData : ExercisePacksActions
+    data object Retry : ExercisePacksActions
+}

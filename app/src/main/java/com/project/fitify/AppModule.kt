@@ -1,15 +1,16 @@
 package com.project.fitify
 
 import org.koin.core.module.dsl.viewModel
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val appModule = module {
 
-    factory<ISimpleInteractor<ExercisePacksDomainModel>> {
-        ExerciseListInteractor(api = get())
+    factory<IInteractor<ExercisePacksActions, ExercisePacksDomainModel>>(qualifier = named(name = "exerciseList")) {
+        ExerciseListInteractor(repository = get())
     }
 
-    factory<IParamInteractor<String, List<ExerciseDtoModel>>> {
+    factory<IInteractor<SearchActions, ExercisePacksDomainModel>>(qualifier = named(name = "search")) {
         SearchInteractor(repository = get())
     }
 
@@ -21,9 +22,9 @@ val appModule = module {
 
     viewModel {
         ExerciseListViewModel(
-            exerciseListInteractor = get(),
+            exerciseListInteractor = get(qualifier = named(name = "exerciseList")),
             exerciseListUiMapper = get(),
-            searchInteractor = get()
+            searchInteractor = get(qualifier = named(name = "search"))
         )
     }
 }

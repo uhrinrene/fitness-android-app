@@ -64,7 +64,7 @@ class ExerciseListViewModel(
 
     override fun handleEvent(event: Event) {
         when (event) {
-            is OnExerciseClicked -> setEffect { Effect.OpenDetailScreen }
+            is OnExerciseClicked -> setEffect { Effect.OpenDetailScreen(packCode = event.packCode, exerciseCode = event.exerciseCode) }
             is OnValueChanged -> viewModelScope.launch {
                 searchInteractor.sendAction(
                     action = SearchActions.Search(

@@ -8,7 +8,7 @@ interface ExerciseListContract {
 
     sealed interface Effect : UiEffect {
 
-        data object OpenDetailScreen : Effect
+        data class OpenDetailScreen(val packCode: String, val exerciseCode: String) : Effect
     }
 
     sealed interface Event : UiEvent {

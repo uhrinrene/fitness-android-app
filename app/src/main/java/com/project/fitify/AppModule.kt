@@ -5,7 +5,20 @@ import org.koin.dsl.module
 
 val appModule = module {
 
-    factory { ExerciseListInteractor(get()) }
+    factory<ISimpleInteractor<ExercisePacksDomainModel>> {
+        ExerciseListInteractor(api = get())
+    }
 
-    viewModel { ExerciseListViewModel(exerciseListInteractor = get()) }
+    single<IExerciseRepository> {
+        ExerciseRepository(api = get<ExerciseApi>())
+    }
+
+    factory { ExerciseListUiMapper() }
+
+    viewModel {
+        ExerciseListViewModel(
+            exerciseListInteractor = get(),
+            exerciseListUiMapper = get()
+        )
+    }
 }

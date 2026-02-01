@@ -24,6 +24,10 @@ val networkModule = module {
             .build()
     }
 
+    single<ExerciseApi> {
+        get<Retrofit>().create(ExerciseApi::class.java)
+    }
+
     single {
         Retrofit.Builder()
             .baseUrl("https://static.gofitify.com/exercises/")

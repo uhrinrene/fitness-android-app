@@ -10,7 +10,8 @@ data class ToolsResponse(
 
 @Serializable
 data class Tool(
-    val code: String,
+    @SerialName("code")
+    val packCode: String,
     @SerialName("exercise_count")
     val exerciseCount: Int,
     val size: Long,

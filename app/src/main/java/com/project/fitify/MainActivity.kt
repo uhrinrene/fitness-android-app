@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import com.project.fitify.navigation.NavGraph
 import com.project.fitify.ui.theme.FitifyTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -24,7 +25,7 @@ class MainActivity : ComponentActivity() {
             FitifyTheme {
                 val navController = rememberNavController()
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    NavGraph(navController = navController)
+                    NavGraph(modifier = innerPadding, navController = navController)
                 }
             }
         }

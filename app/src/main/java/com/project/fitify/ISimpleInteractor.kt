@@ -2,7 +2,7 @@ package com.project.fitify
 
 import kotlinx.coroutines.flow.Flow
 
-interface ISimpleInteractor : IInteractor {
+interface ISimpleInteractor<Output> : IInteractor {
 
-    fun loadData(): Flow<ResultState>
+    fun loadData(): Flow<ResultState<Output>>
 }

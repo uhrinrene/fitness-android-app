@@ -5,11 +5,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ExerciseResponse(
-    val exercises: List<ExerciseDto>
+    val exercises: List<ExerciseModel>
 ) : IResponse
 
 @Serializable
-data class ExerciseDto(
+data class ExerciseModel(
     @SerialName("code")
     val exerciseCode: String,
     val title: String,
@@ -35,7 +35,7 @@ data class ExerciseDto(
     val tool: String?,
     @SerialName("muscle_intensity") val muscleIntensity: Map<String, Int> = emptyMap(),
     @SerialName("muscle_intensity_stretch") val muscleIntensityStretch: Map<String, Int> = emptyMap(),
-    val instructions: InstructionsDto? = null
+    val instructions: InstructionsModel? = null
 )
 
 @Serializable
@@ -53,7 +53,7 @@ data class SetInfo(
 )
 
 @Serializable
-data class InstructionsDto(
+data class InstructionsModel(
     val hints: List<String> = emptyList(),
     val breathing: List<String> = emptyList(),
     val harder: List<String> = emptyList(),

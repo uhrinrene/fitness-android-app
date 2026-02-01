@@ -24,7 +24,7 @@ class ExerciseListInteractor(
                 api.getExercisePacks().tools
                     .map { tool ->
                         async {
-                            api.getExercises(pathCode = tool.packCode).exercises.map { exerciseDto ->
+                            api.getExercises(packCode = tool.packCode).map { exerciseDto ->
                                 exerciseDto to tool.packCode
                             }
                         }

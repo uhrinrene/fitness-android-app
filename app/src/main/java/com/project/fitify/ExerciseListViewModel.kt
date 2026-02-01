@@ -9,7 +9,8 @@ import kotlinx.coroutines.launch
 
 class ExerciseListViewModel(
     private val exerciseListInteractor: ISimpleInteractor<ExercisePacksDomainModel>,
-    private val exerciseListUiMapper: ExerciseListUiMapper
+    private val exerciseListUiMapper: ExerciseListUiMapper,
+    private val searchInteractor: SearchInteractor
 ) : ViewModel() {
 
     private val _exerciseList = MutableStateFlow<StatefulModel<ExercisePacksUiModel>>(value = StatefulModel.Loading())

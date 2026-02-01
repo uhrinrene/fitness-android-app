@@ -9,6 +9,10 @@ val appModule = module {
         ExerciseListInteractor(api = get())
     }
 
+    factory<IParamInteractor<String, List<ExerciseDtoModel>>> {
+        SearchInteractor(repository = get())
+    }
+
     single<IExerciseRepository> {
         ExerciseRepository(api = get<ExerciseApi>())
     }
@@ -18,7 +22,8 @@ val appModule = module {
     viewModel {
         ExerciseListViewModel(
             exerciseListInteractor = get(),
-            exerciseListUiMapper = get()
+            exerciseListUiMapper = get(),
+            searchInteractor = get()
         )
     }
 }

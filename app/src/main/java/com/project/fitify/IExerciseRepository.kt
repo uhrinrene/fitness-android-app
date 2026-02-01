@@ -4,6 +4,7 @@ interface IExerciseRepository {
 
     suspend fun getExercisePacks(): ToolsResponse
 
-    suspend fun getExercises(pathCode: String): ExerciseResponse
+    suspend fun getExercises(packCode: String): List<ExerciseDtoModel>
 
+    suspend fun searchExercises(query: String): List<ExerciseDtoModel>
 }

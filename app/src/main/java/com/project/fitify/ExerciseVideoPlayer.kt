@@ -58,7 +58,7 @@ fun ExerciseVideoPlayer(
                 factory = { ctx ->
                     PlayerView(ctx).apply {
                         this.player = player
-                        useController = true
+                        useController = false
                         resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
                     }
                 },

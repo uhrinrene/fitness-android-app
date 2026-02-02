@@ -28,7 +28,7 @@ fun ExerciseResponse.toExerciseDtoModel(packCode: String) = this.exercises.map {
         muscleIntensity = exerciseModel.muscleIntensity,
         muscleIntensityStretch = exerciseModel.muscleIntensityStretch,
         instructions = exerciseModel.instructions?.let {
-            InstructionsDto(
+            InstructionsDtoModel(
                 hints = it.hints,
                 breathing = it.breathing,
                 harder = it.harder,
@@ -37,3 +37,6 @@ fun ExerciseResponse.toExerciseDtoModel(packCode: String) = this.exercises.map {
         }
     )
 }
+
+fun getThumbnailUrl(packCode: String, exerciseCode: String) =
+    "https://static.gofitify.com/exercises/$packCode/thumbnails/$exerciseCode.jpg"

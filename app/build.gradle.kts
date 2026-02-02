@@ -66,6 +66,10 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
     implementation(libs.org.jetbrains.kotlinx.kotlinx.collections.immutable)
+    implementation(libs.androidx.media3.media3.exoplayer.dash)
+    implementation(libs.androidx.media3.media3.exoplayer.hls)
+    implementation(libs.androidx.media3.media3.exoplayer)
+    implementation(libs.androidx.media3.media3.ui)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

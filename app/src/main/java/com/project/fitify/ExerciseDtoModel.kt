@@ -26,10 +26,10 @@ data class ExerciseDtoModel(
     val tool: String?,
     val muscleIntensity: Map<String, Int> = emptyMap(),
     val muscleIntensityStretch: Map<String, Int> = emptyMap(),
-    val instructions: InstructionsDto? = null
+    val instructions: InstructionsDtoModel? = null
 )
 
-data class InstructionsDto(
+data class InstructionsDtoModel(
     val hints: List<String> = emptyList(),
     val breathing: List<String> = emptyList(),
     val harder: List<String> = emptyList(),

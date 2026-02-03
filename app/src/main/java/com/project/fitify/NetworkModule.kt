@@ -1,5 +1,6 @@
 package com.project.fitify
 
+import com.project.fitify.common.IInstructionLocalSource
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient

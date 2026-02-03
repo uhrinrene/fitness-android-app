@@ -1,14 +1,17 @@
 package com.project.fitify
 
+import com.project.fitify.common.IInstructionLocalSource
+import com.project.fitify.common.data.ExerciseDtoModel
+import com.project.fitify.common.data.toDtoModel
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.serialization.json.Json
 
 // TODO premejslet, jestli neudelat dto objekt uz rovnou tady
 // TODO mozna nebude packCode potreba primo v dto
-// TODO zabezpecit mapu cache pred concurency
 // TODO nevadi, ze je to mutable?
 // TODO upravit metodu getInstructions nejsem si jistej, ze je pekne napsana
+// TODO setridit to abecedne
 class ExerciseRepository(
     private val api: ExerciseApi,
     private val localSource: IInstructionLocalSource,
@@ -21,10 +24,10 @@ class ExerciseRepository(
 
     private val mapMutex = Mutex()
 
-    override suspend fun getExercisePacks() = api.getExercisePacks()
+    override suspend fun getTools() = api.getTools().toDtoModel()
 
     override suspend fun getExercises(packCode: String) =
-        api.getExercises(pathCode = packCode).toExerciseDtoModel(packCode = packCode).apply {
+        api.getExercises(pathCode = packCode).toDtoModel(packCode = packCode).apply {
             cachedExercises[packCode] = this
         }
 
@@ -58,7 +61,7 @@ class ExerciseRepository(
         }
 
         try {
-            val jsonString = localSource.getInstructionsJson()
+            val jsonString = localSource.getInstructionsJson(fileName = INSTRUCTIONS_FILE_NAME)
             val parsedMap = json.decodeFromString<Map<String, String>>(jsonString)
 
             instructionsCache.putAll(parsedMap)
@@ -66,5 +69,9 @@ class ExerciseRepository(
         } catch (e: Exception) {
             throw e
         }
+    }
+
+    companion object {
+        private const val INSTRUCTIONS_FILE_NAME = "instructions"
     }
 }

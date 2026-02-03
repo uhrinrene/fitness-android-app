@@ -12,11 +12,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.project.fitify.navigation.NavGraph
 import com.project.fitify.ui.theme.FitifyTheme
+import com.project.fitify.viewmodel.list.ListViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
 
-    private val mainViewModel: ExerciseListViewModel by viewModel()
+    private val mainViewModel: ListViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

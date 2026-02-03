@@ -1,8 +1,11 @@
 package com.project.fitify
 
+import com.project.fitify.common.data.ExerciseDtoModel
+import com.project.fitify.common.data.ToolsDtoModel
+
 interface IExerciseRepository {
 
-    suspend fun getExercisePacks(): ToolsResponse
+    suspend fun getTools(): ToolsDtoModel
 
     suspend fun getExercises(packCode: String): List<ExerciseDtoModel>
 

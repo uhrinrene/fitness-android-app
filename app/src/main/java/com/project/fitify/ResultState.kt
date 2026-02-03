@@ -3,6 +3,7 @@ package com.project.fitify
 import com.project.fitify.common.coroutines.safeFlow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 
 sealed class ResultState<out T> {
@@ -27,4 +28,19 @@ fun <T : Any> loadResultState(
 ) = safeFlowResultState { scope ->
     emit(value = ResultState.Loading)
     emit(value = ResultState.Success(value = load(scope)))
+}
+
+@Suppress("UNCHECKED_CAST")
+suspend fun <R1, T : ResultState<R1>> Flow<T>.collectEmits(
+    actionLoading: (suspend () -> Unit),
+    actionError: (suspend (errorDomainModel: ErrorDomainModel) -> Unit?)? = null,
+    actionSuccess: (suspend (value: R1) -> Unit)? = null,
+) = collect { value ->
+    when (value) {
+        is ResultState.Loading -> actionLoading()
+        is ResultState.Success<*> -> actionSuccess?.invoke(value.value as R1)
+        is ResultState.Error -> actionError?.let {
+            it(value.errorDomainModel)
+        }
+    }
 }

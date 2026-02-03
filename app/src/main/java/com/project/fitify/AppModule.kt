@@ -2,6 +2,7 @@ package com.project.fitify
 
 import com.project.fitify.common.IInteractor
 import com.project.fitify.common.IVideoPlayerHandler
+import com.project.fitify.common.uimapper.ErrorUiMapper
 import com.project.fitify.model.detail.domainmapping.ExerciseDomainModel
 import com.project.fitify.model.list.domainmapping.ExercisesSummaryDomainModel
 import com.project.fitify.model.detail.ExerciseActions
@@ -32,6 +33,8 @@ val appModule = module {
 
     factory { DetailUiMapper() }
 
+    factory { ErrorUiMapper() }
+
     factory<IVideoPlayerHandler> {
         AndroidVideoPlayerHandler(context = androidContext())
     }
@@ -52,7 +55,8 @@ val appModule = module {
         ListViewModel(
             exerciseListInteractor = get(qualifier = named(name = "exerciseList")),
             listUiMapper = get(),
-            searchInteractor = get(qualifier = named(name = "search"))
+            searchInteractor = get(qualifier = named(name = "search")),
+            errorUiMapper = get()
         )
     }
 
@@ -61,7 +65,8 @@ val appModule = module {
             savedStateHandle = get(),
             exerciseInteractor = get(qualifier = named(name = "exercise")),
             detailUiMapper = get(),
-            playerHandler = get()
+            playerHandler = get(),
+            errorUiMapper = get()
         )
     }
 }

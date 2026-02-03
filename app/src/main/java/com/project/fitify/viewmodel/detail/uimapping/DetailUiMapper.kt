@@ -1,13 +1,13 @@
 package com.project.fitify.viewmodel.detail.uimapping
 
 import com.project.fitify.model.detail.domainmapping.ExerciseDomainModel
-import com.project.fitify.StatefulModel
+import com.project.fitify.StatefulUiModel
 
 class DetailUiMapper {
 
     fun provideContentState(
         domainModel: ExerciseDomainModel,
-    ) = StatefulModel.Content(
+    ) = StatefulUiModel.Content(
         data = ContentUiModel(
             title = domainModel.title,
             detail = domainModel.detail

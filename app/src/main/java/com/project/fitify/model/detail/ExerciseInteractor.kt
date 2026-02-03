@@ -29,7 +29,7 @@ class ExerciseInteractor(
         return _exerciseFlow.flatMapLatest { action ->
 
             when (action) {
-                is ExerciseActions.GetExercise -> {
+                is ExerciseActions.LoadExercise -> {
                     packCode = action.packCode
                     exerciseCode = action.exerciseCode
                     getExercise(
@@ -84,6 +84,6 @@ class ExerciseInteractor(
 }
 
 sealed interface ExerciseActions {
-    data class GetExercise(val packCode: String?, val exerciseCode: String?) : ExerciseActions
+    data class LoadExercise(val packCode: String?, val exerciseCode: String?) : ExerciseActions
     data object Retry : ExerciseActions
 }

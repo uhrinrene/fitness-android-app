@@ -12,8 +12,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.project.fitify.viewmodel.detail.DetailViewModel
 import com.project.fitify.viewmodel.list.ListViewModel
-import com.project.fitify.view.detail.ExerciseDetailScreen
-import com.project.fitify.view.list.ExerciseListScreen
+import com.project.fitify.view.detail.DetailScreen
+import com.project.fitify.view.list.ListScreen
+import com.project.fitify.viewmodel.detail.DetailViewModel.Companion.EXERCISE_CODE
+import com.project.fitify.viewmodel.detail.DetailViewModel.Companion.PACK_CODE
 import org.koin.androidx.compose.koinViewModel
 
 // TODO popremyslet o tech routach
@@ -22,25 +24,27 @@ fun NavGraph(modifier: PaddingValues, navController: NavHostController) {
     Box(modifier = Modifier.padding(paddingValues = modifier)) {
         NavHost(
             navController = navController,
-            startDestination = "exercise_list"
+            startDestination = Screens.LIST.name
         ) {
-            composable(route = "exercise_list") {
+            composable(route = Screens.LIST.name) {
                 val viewModel: ListViewModel = koinViewModel()
-                ExerciseListScreen(
+                ListScreen(
                     viewModel = viewModel,
                     onExerciseClicked = { packCode, exerciseCode ->
-                        navController.navigate("exercise_detail/$packCode/$exerciseCode")
+                        navController.navigate(Screens.DETAIL.name + "/$packCode/$exerciseCode")
                     }
                 )
             }
 
-            composable(route = "exercise_detail/{packCode}/{exerciseCode}", arguments = listOf(
-                navArgument("packCode") { type = NavType.StringType },
-                navArgument("exerciseCode") { type = NavType.StringType }
-            )) {
+            composable(
+                route = Screens.DETAIL.name + "/{$PACK_CODE}/{$EXERCISE_CODE}",
+                arguments = listOf(
+                    navArgument(PACK_CODE) { type = NavType.StringType },
+                    navArgument(EXERCISE_CODE) { type = NavType.StringType }
+                )) {
 
                 val viewModel: DetailViewModel = koinViewModel()
-                ExerciseDetailScreen(
+                DetailScreen(
                     viewModel = viewModel,
                     onBackClicked = {
                         navController.navigateUp()

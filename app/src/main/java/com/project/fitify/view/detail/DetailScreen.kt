@@ -9,11 +9,11 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.project.fitify.viewmodel.detail.DetailViewModel
 import com.project.fitify.view.ExerciseVideoPlayer
-import com.project.fitify.StatefulModel
+import com.project.fitify.StatefulUiModel
 import com.project.fitify.viewmodel.detail.uimapping.DetailUiMapper
 
 @Composable
-fun ExerciseDetailScreen(
+fun DetailScreen(
     modifier: Modifier = Modifier,
     viewModel: DetailViewModel,
     onBackClicked: () -> Unit) {
@@ -22,17 +22,16 @@ fun ExerciseDetailScreen(
     val player by viewModel.playerInstance.collectAsStateWithLifecycle()
 
     when (state.state) {
-        is StatefulModel.Content<DetailUiMapper.ContentUiModel> -> Column {
+        is StatefulUiModel.Content<DetailUiMapper.ContentUiModel> -> Column {
             LazyColumn(modifier = modifier) {
                 item(key = "video") {
                     ExerciseVideoPlayer(player = player)
-                    Text((state.state as StatefulModel.Content<DetailUiMapper.ContentUiModel>).data.detail)
+                    Text((state.state as StatefulUiModel.Content<DetailUiMapper.ContentUiModel>).data.detail)
                 }
             }
         }
 
-        is StatefulModel.Error -> Text("Error")
-        is StatefulModel.Loading -> Text("Loading")
+        is StatefulUiModel.Error -> Text("Error")
+        is StatefulUiModel.Loading -> Text("Loading")
     }
-
 }

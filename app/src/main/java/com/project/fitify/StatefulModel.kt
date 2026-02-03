@@ -2,7 +2,6 @@ package com.project.fitify
 
 import androidx.compose.runtime.Immutable
 
-// TODO proc Immutable
 @Immutable
 sealed class StatefulModel<out T> {
 

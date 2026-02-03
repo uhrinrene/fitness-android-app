@@ -8,6 +8,7 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -34,6 +35,7 @@ fun ThumbnailView(imageUrl: String, modifier: Modifier = Modifier) {
         contentDescription = null,
         modifier = modifier
             .size(width = 64.dp, height = 56.dp)
+            .padding(all = 4.dp)
             .clip(RoundedCornerShape(12.dp)),
         contentScale = ContentScale.Crop,
         loading = {

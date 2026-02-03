@@ -4,9 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Scaffold
-import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.project.fitify.navigation.NavGraph
 import com.project.fitify.ui.theme.FitifyTheme
@@ -19,9 +16,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             FitifyTheme {
                 val navController = rememberNavController()
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    NavGraph(modifier = innerPadding, navController = navController)
-                }
+                NavGraph(navController = navController)
             }
         }
     }

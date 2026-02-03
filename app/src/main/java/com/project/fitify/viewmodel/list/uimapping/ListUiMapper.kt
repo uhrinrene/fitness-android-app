@@ -1,5 +1,6 @@
 package com.project.fitify.viewmodel.list.uimapping
 
+import com.project.fitify.R
 import com.project.fitify.contract.list.ListContract.Event
 import com.project.fitify.model.list.domainmapping.ExercisesSummaryDomainModel
 import com.project.fitify.StatefulUiModel
@@ -16,9 +17,11 @@ class ListUiMapper {
         uiEvent: (Event) -> Unit
     ) = StatefulUiModel.Content(
         data = ContentUiModel(
+            image = R.drawable.logo,
             searchUiModel = SearchUiModel(
                 hint = "Search",
                 value = "",
+                leadingIcon = R.drawable.search,
                 onValueChange = { query ->
                     uiEvent(Event.Search(query = query))
                 }), items = domainModel.items.mapIndexed { index, item ->
@@ -39,9 +42,10 @@ class ListUiMapper {
     )
 
     data class ContentUiModel(
+        val image: Int,
         val searchUiModel: SearchUiModel,
         val items: ImmutableList<ExerciseUiModel>
     )
 }
 
-data class SearchUiModel(val value: String, val hint: String, val onValueChange: (String) -> Unit)
+data class SearchUiModel(val value: String, val hint: String, val leadingIcon: Int, val onValueChange: (String) -> Unit)

@@ -46,12 +46,12 @@ class ExerciseListInteractor(
                             }
                             .awaitAll()
                             .flatten()
-                            .map { (exerciseDto, packCode) ->
+                            .map { (exerciseDtoModel, packCode) ->
                                 ExercisePacksDomainModel.ExercisePackDomainModel(
-                                    thumbnailUrl = "",
-                                    title = exerciseDto.title,
+                                    thumbnailUrl = getThumbnailUrl(packCode = packCode, exerciseCode = exerciseDtoModel.exerciseCode),
+                                    title = exerciseDtoModel.title,
                                     packCode = packCode,
-                                    exerciseCode = exerciseDto.exerciseCode
+                                    exerciseCode = exerciseDtoModel.exerciseCode
                                 )
                             }
                     }

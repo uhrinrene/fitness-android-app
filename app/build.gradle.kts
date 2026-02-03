@@ -70,6 +70,7 @@ dependencies {
     implementation(libs.androidx.media3.media3.exoplayer.hls)
     implementation(libs.androidx.media3.media3.exoplayer)
     implementation(libs.androidx.media3.media3.ui)
+    implementation(libs.androidx.compose.animation.core)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

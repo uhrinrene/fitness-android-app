@@ -16,6 +16,7 @@ navigation = "2.9.7"
 kotlinx-serialization = "1.10.0"
 coil = "3.3.0"
 media3Version = "1.9.1"
+animationCore = "1.10.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -54,6 +55,7 @@ io-insert-koin-koin-androidx-compose = { module = "io.insert-koin:koin-androidx-
 #Navigation
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+androidx-compose-animation-core = { group = "androidx.compose.animation", name = "animation-core", version.ref = "animationCore" }
 
 
 [plugins]

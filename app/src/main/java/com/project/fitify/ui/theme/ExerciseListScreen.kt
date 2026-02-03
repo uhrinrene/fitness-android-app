@@ -32,14 +32,20 @@ fun ExerciseListScreen(
         }
     }
 
+    val contentState = state.state as? StatefulModel.Content<ExercisePacksUiModel>
+    val exerciseList = contentState?.data?.items ?: emptyList()
+
     // TODO podivat se proc je potreba ten cast
     when (state.state) {
         is StatefulModel.Content<ExercisePacksUiModel> -> Column {
             ExerciseSearchBar(model = (state.state as StatefulModel.Content<ExercisePacksUiModel>).data.searchUiModel)
             LazyColumn(modifier = modifier) {
-                items(count = (state.state as StatefulModel.Content<ExercisePacksUiModel>).data.items.size) { index ->
+                items(
+                    count = exerciseList.size,
+                    key = { item -> exerciseList[item].id }
+                ) { item ->
                     ExerciseItemView(
-                        model = (state.state as StatefulModel.Content<ExercisePacksUiModel>).data.items[index]
+                        model = exerciseList[item]
                     )
                 }
             }

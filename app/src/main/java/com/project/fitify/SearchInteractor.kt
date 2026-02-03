@@ -32,7 +32,7 @@ class SearchInteractor(private val repository: IExerciseRepository) :
                 .map { exerciseDto ->
                     ExercisePacksDomainModel.ExercisePackDomainModel(
                         query = query,
-                        thumbnailUrl = "",
+                        thumbnailUrl = getThumbnailUrl(packCode = exerciseDto.packCode, exerciseCode = exerciseDto.exerciseCode),
                         title = exerciseDto.title,
                         packCode = exerciseDto.packCode,
                         exerciseCode = exerciseDto.exerciseCode

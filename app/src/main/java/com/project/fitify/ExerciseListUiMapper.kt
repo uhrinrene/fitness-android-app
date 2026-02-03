@@ -18,8 +18,9 @@ class ExerciseListUiMapper {
                 value = "",
                 onValueChange = { query ->
                     uiEvent(Event.OnValueChanged(query = query))
-                }), items = domainModel.items.map { item ->
+                }), items = domainModel.items.mapIndexed { index, item ->
                 ExercisePackUiModel(
+                    id = index,
                     icon = item.thumbnailUrl,
                     title = item.title,
                     onClick = {
@@ -43,6 +44,7 @@ data class ExercisePacksUiModel(
 data class SearchUiModel(val value: String, val hint: String, val onValueChange: (String) -> Unit)
 
 data class ExercisePackUiModel(
+    val id: Int,
     val icon: String,
     val title: String,
     val onClick: () -> Unit

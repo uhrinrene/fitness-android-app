@@ -1,6 +1,6 @@
 package com.project.fitify.ui.theme
 
-import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
@@ -8,7 +8,7 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -25,7 +25,7 @@ import coil3.request.ImageRequest
 import coil3.request.crossfade
 
 @Composable
-fun thumbnail(imageUrl: String, modifier: Modifier = Modifier) {
+fun Thumbnail(imageUrl: String, modifier: Modifier = Modifier) {
     SubcomposeAsyncImage(
         model = ImageRequest.Builder(LocalContext.current)
             .data(imageUrl)
@@ -33,8 +33,7 @@ fun thumbnail(imageUrl: String, modifier: Modifier = Modifier) {
             .build(),
         contentDescription = null,
         modifier = modifier
-            // TODO aspect radio a marginy nekde usporadat
-            .aspectRatio(16f / 9f)
+            .size(width = 64.dp, height = 56.dp)
             .clip(RoundedCornerShape(12.dp)),
         contentScale = ContentScale.Crop,
         loading = {
@@ -48,25 +47,32 @@ fun thumbnail(imageUrl: String, modifier: Modifier = Modifier) {
 }
 
 private fun Modifier.shimmerEffect(): Modifier = composed {
-    val transition = rememberInfiniteTransition(label = "shimmer")
-    val translateAnim = transition.animateFloat(
+    val shimmerColors = listOf(
+        Color(0xFFE0E0E0),
+        Color(0xFFF5F5F5),
+        Color(0xFFE0E0E0)
+    )
+
+    val transition = rememberInfiniteTransition(label = "shimmer_transition")
+
+    val translateAnimation = transition.animateFloat(
         initialValue = 0f,
         targetValue = 1000f,
         animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 1200, easing = LinearEasing),
+            animation = tween(
+                durationMillis = 1000, // Rychlost animace
+                easing = FastOutSlowInEasing
+            ),
             repeatMode = RepeatMode.Restart
-        ),label = "shimmer"
+        ),
+        label = "shimmer_float"
     )
 
-    background(
-        brush = Brush.linearGradient(
-            colors = listOf(
-                Color(0xFFE0E0E0),
-                Color(0xFFF5F5F5),
-                Color(0xFFE0E0E0)
-            ),
-            start = Offset(translateAnim.value - 1000f, translateAnim.value - 1000f),
-            end = Offset(translateAnim.value, translateAnim.value)
-        )
+    val brush = Brush.linearGradient(
+        colors = shimmerColors,
+        start = Offset.Zero,
+        end = Offset(x = translateAnimation.value, y = translateAnimation.value)
     )
+
+    this.background(brush)
 }

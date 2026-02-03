@@ -12,8 +12,7 @@ fun ExerciseItemView(modifier: Modifier = Modifier, model: ExercisePackUiModel) 
     Row(modifier = Modifier.clickable {
         model.onClick()
     }) {
-        // TODO spatne funguje
-//        thumbnail(imageUrl = model.icon)
+        Thumbnail(imageUrl = model.icon)
         Text(text = model.title)
     }
 }

@@ -1,6 +1,5 @@
 package com.project.fitify.view.detail
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -9,8 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.project.fitify.viewmodel.detail.DetailViewModel
 import com.project.fitify.view.ExerciseVideoPlayer
-import com.project.fitify.StatefulUiModel
-import com.project.fitify.viewmodel.detail.uimapping.DetailUiMapper
+import com.project.fitify.view.StatefulView
 
 @Composable
 fun DetailScreen(
@@ -21,17 +19,12 @@ fun DetailScreen(
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val player by viewModel.playerInstance.collectAsStateWithLifecycle()
 
-    when (state.state) {
-        is StatefulUiModel.Content<DetailUiMapper.ContentUiModel> -> Column {
-            LazyColumn(modifier = modifier) {
-                item(key = "video") {
-                    ExerciseVideoPlayer(player = player)
-                    Text((state.state as StatefulUiModel.Content<DetailUiMapper.ContentUiModel>).data.detail)
-                }
+    StatefulView(modifier = modifier, data = state.state, content = { contentUiModel ->
+        LazyColumn(modifier = modifier) {
+            item(key = "video") {
+                ExerciseVideoPlayer(player = player)
+                Text(text = contentUiModel.detail)
             }
         }
-
-        is StatefulUiModel.Error -> Text("Error")
-        is StatefulUiModel.Loading -> Text("Loading")
-    }
+    })
 }

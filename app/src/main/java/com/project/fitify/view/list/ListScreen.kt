@@ -75,9 +75,7 @@ fun ListScreen(
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = MaterialTheme.colorScheme.primary,
-
                         titleContentColor = Color.White,
-
                         navigationIconContentColor = Color.White,
                         actionIconContentColor = Color.White
                     )

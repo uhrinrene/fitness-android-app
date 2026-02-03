@@ -18,7 +18,6 @@ import com.project.fitify.viewmodel.detail.DetailViewModel.Companion.EXERCISE_CO
 import com.project.fitify.viewmodel.detail.DetailViewModel.Companion.PACK_CODE
 import org.koin.androidx.compose.koinViewModel
 
-// TODO popremyslet o tech routach
 @Composable
 fun NavGraph(modifier: PaddingValues, navController: NavHostController) {
     Box(modifier = Modifier.padding(paddingValues = modifier)) {

@@ -37,7 +37,7 @@ fun <T> StatefulView(
 fun LoadingView(
     modifier: Modifier = Modifier
 ) {
-    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         CircularProgressIndicator(
             modifier = modifier,
             strokeWidth = 4.dp,

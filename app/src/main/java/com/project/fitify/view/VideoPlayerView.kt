@@ -46,9 +46,7 @@ fun ExerciseVideoPlayer(
     }
 
     Box(
-        modifier = modifier
-            .clip(RoundedCornerShape(24.dp))
-            .background(Color.Black),
+        modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
         if (player == null) {

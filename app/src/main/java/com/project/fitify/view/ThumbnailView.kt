@@ -35,8 +35,8 @@ fun ThumbnailView(imageUrl: String, modifier: Modifier = Modifier) {
         contentDescription = null,
         modifier = modifier
             .size(width = 64.dp, height = 56.dp)
-            .padding(all = 4.dp)
-            .clip(RoundedCornerShape(12.dp)),
+            .padding(horizontal = 8.dp, vertical = 4.dp)
+            .clip(RoundedCornerShape(size = 4.dp)),
         contentScale = ContentScale.Crop,
         loading = {
             Box(

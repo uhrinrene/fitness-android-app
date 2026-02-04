@@ -9,7 +9,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -18,8 +17,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.project.fitify.ui.theme.RobotoFontFamily
 import com.project.fitify.viewmodel.list.uimapping.SearchUiModel
 
 @Composable
@@ -41,8 +44,14 @@ fun SearchBarView(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp),
+        textStyle = TextStyle(
+            fontFamily = RobotoFontFamily,
+            color = MaterialTheme.colorScheme.tertiary,
+            fontWeight = FontWeight.Normal,
+            fontSize = 16.sp
+        ),
         placeholder = {
-            Text(text = model.hint, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.tertiary)
+            FontText(text = model.hint, textColor = MaterialTheme.colorScheme.tertiary, fontWeight = FontWeight.Normal)
         },
         leadingIcon = {
             Icon(modifier = Modifier.size(size = 40.dp), painter = painterResource(id = model.leadingIcon), contentDescription = null, tint = MaterialTheme.colorScheme.surface)

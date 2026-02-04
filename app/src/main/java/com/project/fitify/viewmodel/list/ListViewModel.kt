@@ -15,6 +15,7 @@ import com.project.fitify.common.uimapper.ErrorUiMapper
 import com.project.fitify.contract.list.ListContract.*
 import com.project.fitify.model.detail.ExerciseActions
 import com.project.fitify.model.search.SearchActions.*
+import com.project.fitify.model.search.domainmapping.SearchDomainModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.launch
@@ -23,7 +24,7 @@ class ListViewModel(
     private val exerciseListInteractor: IInteractor<ListActions, ExercisesSummaryDomainModel>,
     private val listUiMapper: ListUiMapper,
     private val errorUiMapper: ErrorUiMapper,
-    private val searchInteractor: IInteractor<SearchActions, ExercisesSummaryDomainModel>
+    private val searchInteractor: IInteractor<SearchActions, SearchDomainModel>
 ) : MviViewModel<Event, State, Effect>() {
 
     override fun createInitialState() = State(state = StatefulUiModel.Loading())
@@ -72,7 +73,8 @@ class ListViewModel(
             setState {
                 copy(
                     state = listUiMapper.provideContentState(
-                        domainModel = result,
+                        domainModel = result.exercisesSummaryDomainModel,
+                        query = result.query,
                         uiEvent = ::setEvent
                     )
                 )

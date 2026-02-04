@@ -14,13 +14,14 @@ class ListUiMapper {
 
     fun provideContentState(
         domainModel: ExercisesSummaryDomainModel,
+        query: String = "",
         uiEvent: (Event) -> Unit
     ) = StatefulUiModel.Content(
         data = ContentUiModel(
             image = R.drawable.logo,
             searchUiModel = SearchUiModel(
                 hint = "Search",
-                value = "",
+                value = query,
                 leadingIcon = R.drawable.search,
                 onValueChange = { query ->
                     uiEvent(Event.Search(query = query))

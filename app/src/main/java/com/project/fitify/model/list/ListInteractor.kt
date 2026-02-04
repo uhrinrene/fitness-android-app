@@ -22,8 +22,6 @@ class ListInteractor(
     override suspend fun sendAction(action: ListActions) =
         _exerciseListFlow.emit(value = action)
 
-    // TODO Zkusit chybu
-    // TODO formatovani
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun loadData(): Flow<ResultState<ExercisesSummaryDomainModel>> {
 

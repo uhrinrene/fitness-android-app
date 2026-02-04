@@ -1,4 +1,4 @@
-# 🏋️ Fitify – Android Fitness App
+# 🏋️ Android Fitness App
 
 A modern Android application for browsing, searching, and playing fitness exercises. This project serves as a showcase of **Clean Architecture** implementation, the **MVVM** pattern, and advanced asynchronous operations in **Kotlin**.
 

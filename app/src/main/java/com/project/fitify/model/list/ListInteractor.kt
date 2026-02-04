@@ -1,10 +1,10 @@
 package com.project.fitify.model.list
 
-import com.project.fitify.IExerciseRepository
+import com.project.fitify.common.network.IExerciseRepository
 import com.project.fitify.common.IInteractor
-import com.project.fitify.ResultState
+import com.project.fitify.common.ResultState
 import com.project.fitify.model.list.domainmapping.ExercisesSummaryDomainModel
-import com.project.fitify.loadResultState
+import com.project.fitify.common.loadResultState
 import com.project.fitify.model.list.domainmapping.toExercisesSummaryDomainModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async

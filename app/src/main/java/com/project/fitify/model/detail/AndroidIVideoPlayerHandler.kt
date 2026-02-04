@@ -1,4 +1,4 @@
-package com.project.fitify
+package com.project.fitify.model.detail
 
 import android.content.Context
 import androidx.media3.common.MediaItem

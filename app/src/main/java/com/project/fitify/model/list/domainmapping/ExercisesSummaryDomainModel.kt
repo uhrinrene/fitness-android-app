@@ -1,7 +1,7 @@
 package com.project.fitify.model.list.domainmapping
 
-import com.project.fitify.common.data.ExerciseDtoModel
-import com.project.fitify.getThumbnailUrl
+import com.project.fitify.common.data.dto.ExerciseDtoModel
+import com.project.fitify.common.getThumbnailUrl
 
 data class ExercisesSummaryDomainModel(val items: List<ExerciseSummaryDomainModel>) {
 

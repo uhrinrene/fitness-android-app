@@ -2,7 +2,7 @@ package com.project.fitify.viewmodel.detail.uimapping
 
 import com.project.fitify.R
 import com.project.fitify.model.detail.domainmapping.ExerciseDomainModel
-import com.project.fitify.StatefulUiModel
+import com.project.fitify.view.stateful.StatefulUiModel
 
 class DetailUiMapper {
 

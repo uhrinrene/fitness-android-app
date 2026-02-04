@@ -1,6 +1,5 @@
 package com.project.fitify.common
 
-import com.project.fitify.ResultState
 import kotlinx.coroutines.flow.Flow
 
 interface IInteractor<Action, Output> {

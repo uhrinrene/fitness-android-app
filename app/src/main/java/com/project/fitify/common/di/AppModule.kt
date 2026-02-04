@@ -1,5 +1,9 @@
-package com.project.fitify
+package com.project.fitify.common.di
 
+import com.project.fitify.model.detail.AndroidVideoPlayerHandler
+import com.project.fitify.common.network.ExerciseApi
+import com.project.fitify.common.network.ExerciseRepository
+import com.project.fitify.common.network.IExerciseRepository
 import com.project.fitify.common.IInteractor
 import com.project.fitify.common.IVideoPlayerHandler
 import com.project.fitify.common.uimapper.ErrorUiMapper
@@ -48,8 +52,6 @@ val appModule = module {
     }
 
     factory { ListUiMapper() }
-
-    factory { DetailUiMapper() }
 
     viewModel {
         ListViewModel(

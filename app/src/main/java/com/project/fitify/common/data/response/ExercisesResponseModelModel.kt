@@ -1,12 +1,12 @@
-package com.project.fitify.common.data
+package com.project.fitify.common.data.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ExercisesResponseModel(
+data class ExercisesResponseModelModel(
     val exercises: List<ExerciseModel>
-) : IResponse
+) : IResponseModel
 
 @Serializable
 data class ExerciseModel(

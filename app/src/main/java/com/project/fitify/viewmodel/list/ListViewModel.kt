@@ -1,23 +1,18 @@
 package com.project.fitify.viewmodel.list
 
 import androidx.lifecycle.viewModelScope
-import com.project.fitify.contract.list.ListContract
 import com.project.fitify.viewmodel.list.uimapping.ListUiMapper
 import com.project.fitify.model.list.ListActions
 import com.project.fitify.model.list.domainmapping.ExercisesSummaryDomainModel
 import com.project.fitify.common.IInteractor
 import com.project.fitify.common.mvi.MviViewModel
-import com.project.fitify.ResultState
 import com.project.fitify.model.search.SearchActions
-import com.project.fitify.StatefulUiModel
-import com.project.fitify.collectEmits
+import com.project.fitify.view.stateful.StatefulUiModel
+import com.project.fitify.common.collectEmits
 import com.project.fitify.common.uimapper.ErrorUiMapper
 import com.project.fitify.contract.list.ListContract.*
-import com.project.fitify.model.detail.ExerciseActions
 import com.project.fitify.model.search.SearchActions.*
 import com.project.fitify.model.search.domainmapping.SearchDomainModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.launch
 
 class ListViewModel(

@@ -1,6 +1,6 @@
 package com.project.fitify.contract.detail
 
-import com.project.fitify.StatefulUiModel
+import com.project.fitify.view.stateful.StatefulUiModel
 import com.project.fitify.common.mvi.UiEffect
 import com.project.fitify.common.mvi.UiEvent
 import com.project.fitify.common.mvi.UiState

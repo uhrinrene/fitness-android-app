@@ -1,4 +1,4 @@
-package com.project.fitify
+package com.project.fitify.common
 
 import com.project.fitify.common.coroutines.safeFlow
 import kotlinx.coroutines.CoroutineScope

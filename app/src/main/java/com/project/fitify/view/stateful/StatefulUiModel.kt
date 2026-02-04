@@ -1,4 +1,4 @@
-package com.project.fitify
+package com.project.fitify.view.stateful
 
 import androidx.compose.runtime.Immutable
 

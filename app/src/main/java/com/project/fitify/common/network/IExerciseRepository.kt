@@ -1,7 +1,7 @@
-package com.project.fitify
+package com.project.fitify.common.network
 
-import com.project.fitify.common.data.ExerciseDtoModel
-import com.project.fitify.common.data.ToolsDtoModel
+import com.project.fitify.common.data.dto.ExerciseDtoModel
+import com.project.fitify.common.data.dto.ToolsDtoModel
 
 interface IExerciseRepository {
 

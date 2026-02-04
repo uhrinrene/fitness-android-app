@@ -1,4 +1,7 @@
-package com.project.fitify.common.data
+package com.project.fitify.common.data.dto
+
+import com.project.fitify.common.data.response.ExercisesResponseModelModel
+import com.project.fitify.common.data.response.SetInfoModel
 
 data class ExerciseDtoModel(
     val exerciseCode: String,
@@ -27,7 +30,7 @@ data class ExerciseDtoModel(
     val muscleIntensity: Map<String, Int> = emptyMap(),
     val muscleIntensityStretch: Map<String, Int> = emptyMap(),
     val instructions: InstructionsDtoModel? = null
-)
+) : IDtoModel
 
 data class InstructionsDtoModel(
     val hints: List<String> = emptyList(),
@@ -36,7 +39,7 @@ data class InstructionsDtoModel(
     val easier: List<String> = emptyList()
 )
 
-fun ExercisesResponseModel.toDtoModel(packCode: String) = this.exercises.map { exerciseModel ->
+fun ExercisesResponseModelModel.toDtoModel(packCode: String) = this.exercises.map { exerciseModel ->
     ExerciseDtoModel(
         exerciseCode = exerciseModel.exerciseCode,
         packCode = packCode,

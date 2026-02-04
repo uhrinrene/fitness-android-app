@@ -1,11 +1,11 @@
 package com.project.fitify.model.detail
 
-import com.project.fitify.IExerciseRepository
-import com.project.fitify.ResultState
+import com.project.fitify.common.network.IExerciseRepository
+import com.project.fitify.common.ResultState
 import com.project.fitify.common.IInteractor
 import com.project.fitify.model.detail.domainmapping.ExerciseDomainModel
-import com.project.fitify.common.data.InstructionsDtoModel
-import com.project.fitify.loadResultState
+import com.project.fitify.common.data.dto.InstructionsDtoModel
+import com.project.fitify.common.loadResultState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow

@@ -1,4 +1,4 @@
-package com.project.fitify.view
+package com.project.fitify.view.search
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,17 +17,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.project.fitify.ui.theme.RobotoFontFamily
-import com.project.fitify.viewmodel.list.uimapping.SearchUiModel
+import com.project.fitify.view.FontText
 
 @Composable
 fun SearchBarView(
-    model: SearchUiModel,
+    model: SearchBarUiModel,
     modifier: Modifier = Modifier
 ) {
 
@@ -51,10 +52,19 @@ fun SearchBarView(
             fontSize = 16.sp
         ),
         placeholder = {
-            FontText(text = model.hint, textColor = MaterialTheme.colorScheme.tertiary, fontWeight = FontWeight.Normal)
+            FontText(
+                text = stringResource(id = model.hint),
+                textColor = MaterialTheme.colorScheme.tertiary,
+                fontWeight = FontWeight.Normal
+            )
         },
         leadingIcon = {
-            Icon(modifier = Modifier.size(size = 40.dp), painter = painterResource(id = model.leadingIcon), contentDescription = null, tint = MaterialTheme.colorScheme.surface)
+            Icon(
+                modifier = Modifier.size(size = 40.dp),
+                painter = painterResource(id = model.leadingIcon),
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.surface
+            )
         },
         shape = RoundedCornerShape(size = 28.dp),
         singleLine = true,

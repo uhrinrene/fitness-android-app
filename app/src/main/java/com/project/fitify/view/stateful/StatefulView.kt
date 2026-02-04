@@ -1,4 +1,4 @@
-package com.project.fitify.view
+package com.project.fitify.view.stateful
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.Arrangement
@@ -13,8 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.unit.dp
-import com.project.fitify.ErrorUiModel
-import com.project.fitify.StatefulUiModel
 
 @Composable
 fun <T> StatefulView(

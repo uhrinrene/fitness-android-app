@@ -1,6 +1,8 @@
-package com.project.fitify
+package com.project.fitify.common.di
 
+import com.project.fitify.common.network.ExerciseApi
 import com.project.fitify.common.IInstructionLocalSource
+import com.project.fitify.model.detail.AndroidInstructionLocalSourceInteractor
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -39,7 +41,7 @@ val networkModule = module {
     }
 
     single<IInstructionLocalSource> {
-        AndroidInstructionLocalSource(context = androidContext())
+        AndroidInstructionLocalSourceInteractor(context = androidContext())
     }
 
     single<ExerciseApi> {

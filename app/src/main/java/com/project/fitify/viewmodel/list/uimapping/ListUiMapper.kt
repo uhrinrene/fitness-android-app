@@ -3,13 +3,12 @@ package com.project.fitify.viewmodel.list.uimapping
 import com.project.fitify.R
 import com.project.fitify.contract.list.ListContract.Event
 import com.project.fitify.model.list.domainmapping.ExercisesSummaryDomainModel
-import com.project.fitify.StatefulUiModel
+import com.project.fitify.view.stateful.StatefulUiModel
 import com.project.fitify.view.exercise.ExerciseUiModel
+import com.project.fitify.view.search.SearchBarUiModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
-// TODO udelat interface nad mapperem
-// TODO premyslet nad nazvama, myslim si, ze nejsou uplne top notch
 class ListUiMapper {
 
     fun provideContentState(
@@ -19,8 +18,8 @@ class ListUiMapper {
     ) = StatefulUiModel.Content(
         data = ContentUiModel(
             image = R.drawable.logo,
-            searchUiModel = SearchUiModel(
-                hint = "Search",
+            searchUiModel = SearchBarUiModel(
+                hint = R.string.search,
                 value = query,
                 leadingIcon = R.drawable.search,
                 onValueChange = { query ->
@@ -44,9 +43,7 @@ class ListUiMapper {
 
     data class ContentUiModel(
         val image: Int,
-        val searchUiModel: SearchUiModel,
+        val searchUiModel: SearchBarUiModel,
         val items: ImmutableList<ExerciseUiModel>
     )
 }
-
-data class SearchUiModel(val value: String, val hint: String, val leadingIcon: Int, val onValueChange: (String) -> Unit)
